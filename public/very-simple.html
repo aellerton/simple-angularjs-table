@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app='tableApp'>
+<head>
+  <title>Angular Tables</title>
+</head>
+<body>
+<h1>Very Simple</h1>
+<p>This page has a hard-coded list of data, rendered in a table. No sorting, cleverness, CSS.</p>
+
+<div ng-controller='VerySimple'>
+  <table>
+    <caption>{{dataset.name}}</caption>
+    <thead>
+      <tr><th>Country</th><th>1990</th><th>2008</th><th>2025</th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="country in dataset.rows">
+        <td>{{country.name}}</td>
+        <td>{{country.pop1990|number}}</td>
+        <td>{{country.pop2008|number}}</td>
+        <td>{{country.est2025|number}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><th>Rows: {{dataset.rows.length|number}}</th></tr>
+    </tfoot>
+  </table>
+</div>    
+
+<!-- javascript at end to load page faster -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<script>
+var app = angular.module('tableApp', []);
+
+app.controller('VerySimple', function($scope) {
+
+  // top 10 population from http://en.wikipedia.org/wiki/World_population
+  $scope.dataset = {
+    name: 'Top 10 population stats from Wikipedia (millions)',
+    rows: [
+      {name:'China', pop1990: 1141, pop2008: 1333, est2025: 1458},
+      {name:'India', pop1990: 849, pop2008: 1140, est2025: 1398},
+      {name:'United States', pop1990: 250, pop2008: 304, est2025: 352},
+      {name:'Indonesia', pop1990: 178, pop2008: 228, est2025: 273},
+      {name:'Brazil', pop1990: 150, pop2008: 192, est2025: 223},
+      {name:'Pakistan', pop1990: 108, pop2008: 166, est2025: 226},
+      {name:'Bangladesh', pop1990: 116, pop2008: 160, est2025: 198},
+      {name:'Nigeria', pop1990: 94, pop2008: 151, est2025: 208},
+      {name:'Russia', pop1990: 149, pop2008: 143, est2025: 137},
+      {name:'Japan', pop1990: 124, pop2008: 128, est2025: 126}
+    ]
+  }
+});
+
+</script>
+</body>
+</html>
+
